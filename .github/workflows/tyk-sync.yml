@@ -1,0 +1,42 @@
+name: Tyk Sync
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main  # Change this to your target branch
+
+jobs:
+  sync-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Create .tyk.json
+      run: |
+        echo '{' > .tyk.json
+        echo '  "type": "apidef",' >> .tyk.json
+        echo '  "files": [' >> .tyk.json
+        find . -type f -name '*.json' -path './infrastructure/staging/tyk/apis/*' -exec echo '    {"file": "{}"},' \; | sed '$ s/,$//' >> .tyk.json
+        echo '  ],' >> .tyk.json
+        echo '  "policies": [' >> .tyk.json
+        find . -type f -name '*.json' -path './infrastructure/staging/tyk/policies/*' -exec echo '    {"file": "{}"},' \; | sed '$ s/,$//' >> .tyk.json
+        echo '  ],' >> .tyk.json
+        echo '  "assets": [' >> .tyk.json
+        find . -type f -name '*.json' -path './infrastructure/staging/tyk/assets/*' -exec echo '    {"file": "{}"},' \; | sed '$ s/,$//' >> .tyk.json
+        echo '  ]' >> .tyk.json
+        echo '}' >> .tyk.json
+        cat .tyk.json
+
+    - name: Sync with Tyk
+      run: |
+        echo 'Sync config to ${TYK_DASHBOARD_URL}'
+        docker run -v ${{ github.workspace }}:/app/data ${TYK_SYNC_REPO}:${TYK_SYNC_VERSION} sync --path /app/data --dashboard ${TYK_DASHBOARD_URL} --secret ${TYK_DASHBOARD_SECRET}
+      env:
+        TYK_SYNC_REPO: ${{ vars.TYK_SYNC_REPO }}
+        TYK_SYNC_VERSION: ${{ vars.TYK_SYNC_VERSION }}
+        TYK_DASHBOARD_URL: ${{ vars.TYK_DASHBOARD_URL }}
+        TYK_DASHBOARD_SECRET: ${{ secrets.TYK_DASHBOARD_SECRET }}
