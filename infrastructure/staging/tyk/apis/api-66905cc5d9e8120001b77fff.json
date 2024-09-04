@@ -8,7 +8,7 @@
     "enable_proxy_protocol": false,
     "api_id": "9995af1ffd344b68728d294eda52666a",
     "org_id": "664f5023d4df31000105fc8d",
-    "use_keyless": false,
+    "use_keyless": true,
     "use_oauth2": false,
     "use_openid": false,
     "openid_options": {
