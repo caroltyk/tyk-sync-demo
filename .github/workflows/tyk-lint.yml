@@ -10,6 +10,10 @@ on:
 jobs:
    tyk-lint:
       runs-on: ubuntu-latest
+      permissions:
+        contents: read
+        actions: read
+        checks: write
       steps:
         - 
             name: Checkout
@@ -17,14 +21,6 @@ jobs:
         -
             name: Install Spectral
             run: npm install -g @stoplight/spectral-cli
-        -
-            name: Lint api definitions
-            run: spectral lint --ruleset infrastructure/staging/tyk/tykapi-ruleset.yaml infrastructure/staging/tyk/apis/api-*.json 
-            continue-on-error: true
-        -
-            name: Lint oas api definitions
-            run: spectral lint --ruleset infrastructure/staging/tyk/tykoas-ruleset.yaml infrastructure/staging/tyk/apis/oas-*.json
-            continue-on-error: true
         -
             name: Lint api definitions
             uses: stoplightio/spectral-action@latest

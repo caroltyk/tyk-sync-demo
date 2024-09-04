@@ -5,6 +5,8 @@ on:
   push:
     paths:
       - 'infrastructure/staging/tyk/**'
+    branches: 
+      - main
 
 jobs:
   tyk-lint:
