@@ -2,8 +2,8 @@ name: Lint Tyk APIs
 
 on:
    pull_request:
-    paths:
-      - 'infrastructure/staging/tyk/**'
+     paths:
+       - 'infrastructure/staging/tyk/**'
    workflow_dispatch:
    workflow_call:
 
@@ -24,4 +24,18 @@ jobs:
         -
             name: Lint oas api definitions
             run: spectral lint --ruleset infrastructure/staging/tyk/tykoas-ruleset.yaml infrastructure/staging/tyk/apis/oas-*.json
+            continue-on-error: true
+        -
+            name: Lint api definitions
+            uses: stoplightio/spectral-action@latest
+            with:
+                file_glob: infrastructure/staging/tyk/apis/api-*.json
+                spectral_ruleset: infrastructure/staging/tyk/tykapi-ruleset.yaml
+            continue-on-error: true
+        -
+            name: Lint oas api definitions
+            uses: stoplightio/spectral-action@latest
+            with:
+                file_glob: infrastructure/staging/tyk/apis/oas-*.json
+                spectral_ruleset: infrastructure/staging/tyk/tykoas-ruleset.yaml
             continue-on-error: true

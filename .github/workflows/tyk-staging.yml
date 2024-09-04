@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'infrastructure/staging/tyk'
+      - 'infrastructure/staging/tyk/**'
 
 jobs:
   tyk-lint:
