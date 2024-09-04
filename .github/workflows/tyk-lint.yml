@@ -23,5 +23,5 @@ jobs:
             continue-on-error: true
         -
             name: Lint oas api definitions
-            run: spectral lint --ruleset oas3 infrastructure/staging/tyk/apis/oas-*.json
+            run: spectral lint --ruleset infrastructure/staging/tyk/tykoas-ruleset.yaml infrastructure/staging/tyk/apis/oas-*.json
             continue-on-error: true
