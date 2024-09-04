@@ -1,13 +1,16 @@
-name: Tyk Sync
+name: Tyk Sync (Staging)
 
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main  # Change this to your target branch
+    paths:
+      - 'infrastructure/staging/tyk'
 
 jobs:
-  sync-staging:
+  tyk-lint:
+     uses: .github/workflows/tyk-lint.yml
+
+  tyk-sync-staging:
     runs-on: ubuntu-latest
     environment: staging
 

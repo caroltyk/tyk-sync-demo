@@ -1,4 +1,4 @@
-name: Tyk Sync
+name: Tyk Sync (production)
 
 on:
   workflow_dispatch:

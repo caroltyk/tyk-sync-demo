@@ -1,0 +1,8 @@
+rules:
+  no-keyless-api:
+    description: APIs must not be keyless
+    given: $.api_definition
+    severity: error
+    then:
+      field: use_keyless 
+      function: falsy 
