@@ -842,7 +842,7 @@
       },
       "/store/order/{orderId}": {
         "delete": {
-          "description": "For valid response try integer IDs with value \u003c 1000. Anything above 1000 or nonintegers will generate API errors",
+          "description": "For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors",
           "operationId": "deleteOrder",
           "parameters": [
             {
@@ -871,7 +871,7 @@
           "x-swagger-router-controller": "OrderController"
         },
         "get": {
-          "description": "For valid response try integer IDs with value \u003c= 5 or \u003e 10. Other values will generate exceptions.",
+          "description": "For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.",
           "operationId": "getOrderById",
           "parameters": [
             {
@@ -1252,16 +1252,16 @@
             "enabled": true
           },
           "pluginConfig": {
-              "data": {
-                  "enabled": true,
-                  "value": {
-                        "map": {
-                            "key": 3
-                        },
-                    "num": 4,
-                    "string": "petstore jwt"
-                  }
+            "data": {
+              "enabled": true,
+              "value": {
+                "map": {
+                  "key": 3
+                },
+                "num": 4,
+                "string": "petstore jwt"
               }
+            }
           }
         }
       },
@@ -1305,5 +1305,10 @@
   "is_site": false,
   "sort_by": 0,
   "user_group_owners": [],
-  "user_owners": []
+  "user_owners": [],
+  "api_definition": {
+    "proxy": {
+      "target_url": null
+    }
+  }
 }

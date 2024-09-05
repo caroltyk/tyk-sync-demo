@@ -412,14 +412,14 @@
     "do_not_track": false,
     "enable_context_vars": false,
     "config_data": {
-        "enabled": true,
-        "value": {
-              "map": {
-                  "key": 3
-              },
-          "num": 4,
-          "string": "starwars"
-        }
+      "enabled": true,
+      "value": {
+        "map": {
+          "key": 3
+        },
+        "num": 4,
+        "string": "starwars"
+      }
     },
     "config_data_disabled": false,
     "tag_headers": [],
@@ -479,7 +479,9 @@
         "disabled": false
       }
     },
-    "tags": ["edge"],
+    "tags": [
+      "edge"
+    ],
     "detailed_tracing": false,
     "scopes": {
       "jwt": {},
