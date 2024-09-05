@@ -415,7 +415,16 @@
     "certificates": [],
     "do_not_track": false,
     "enable_context_vars": false,
-    "config_data": {},
+    "config_data": {
+        "enabled": true,
+        "value": {
+              "map": {
+                  "key": 3
+              },
+          "num": 4,
+          "string": "httpbin jwt"
+        }
+    },
     "config_data_disabled": false,
     "tag_headers": [],
     "global_rate_limit": {

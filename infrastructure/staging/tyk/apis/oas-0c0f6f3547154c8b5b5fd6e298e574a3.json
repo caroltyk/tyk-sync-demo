@@ -1250,6 +1250,18 @@
           },
           "trafficLogs": {
             "enabled": true
+          },
+          "pluginConfig": {
+              "data": {
+                  "enabled": true,
+                  "value": {
+                        "map": {
+                            "key": 3
+                        },
+                    "num": 4,
+                    "string": "petstore jwt"
+                  }
+              }
           }
         }
       },
