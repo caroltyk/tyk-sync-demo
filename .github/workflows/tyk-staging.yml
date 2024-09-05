@@ -15,10 +15,12 @@ permissions:
   
 jobs:
   tyk-lint:
-     uses: ./.github/workflows/tyk-lint.yml
+    uses: ./.github/workflows/tyk-lint.yml
+    with:
+      environment: staging
 
   tyk-sync-staging:
-    if: ${{ success() }} # This condition ensures it only runs if the previous step was successful
+    needs: tyk-lint
     runs-on: ubuntu-latest
     environment: staging
 

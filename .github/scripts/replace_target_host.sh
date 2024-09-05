@@ -12,6 +12,8 @@ if [ -z "$DIRECTORY" ]; then
   exit 1
 fi
 
+echo "Replace TARGET_HOST with $TARGET_HOST in directory $DIRECTORY"
+
 # Loop through all JSON files in the directory
 for json_file in "$directory"/*.json; do
   # Check if the file exists
