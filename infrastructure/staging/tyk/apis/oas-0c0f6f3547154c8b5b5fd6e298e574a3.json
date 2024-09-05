@@ -1281,19 +1281,13 @@
               "identityBaseField": "sub",
               "policyFieldName": "pol",
               "signingMethod": "rsa",
-              "source": "aHR0cDovL2tleWNsb2FrLmtleWNsb2FrLnN2Yy9yZWFsbXMvand0L3Byb3RvY29sL29wZW5pZC1jb25uZWN0L2NlcnRz"
+              "source": "env://TYK_SECRET_KEYCLOAK_SOURCE"
             }
           }
         },
         "listenPath": {
           "strip": true,
           "value": "/petstore-jwt"
-        },
-        "gatewayTags": {
-          "enabled": true,
-          "tags": [
-            "env://TYK_SECRET_ENV"
-          ]
         }
       },
       "upstream": {
