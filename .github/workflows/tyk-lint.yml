@@ -19,15 +19,27 @@ jobs:
             name: Checkout
             uses: actions/checkout@v4
         -
-            name: Install Spectral
-            run: npm install -g @stoplight/spectral-cli
-        -
             name: Lint api definitions
             uses: stoplightio/spectral-action@latest
             with:
                 file_glob: infrastructure/staging/tyk/apis/api-*.json
                 spectral_ruleset: infrastructure/staging/tyk/tykapi-ruleset.yaml
             continue-on-error: true
+        -
+            name: Extract OAS
+            run: |
+                #!/bin/bash
+
+                cd infrastructure/staging/tyk/apis
+                
+                for file in oas-*.json; do
+                    if [ -f "$file" ]; then
+                        jq '.oas' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+                        echo "finished processing $file"
+                    fi
+                done
+
+                echo "done"
         -
             name: Lint oas api definitions
             uses: stoplightio/spectral-action@latest

@@ -13,6 +13,7 @@ jobs:
      uses: ./.github/workflows/tyk-lint.yml
 
   tyk-sync-staging:
+    if: ${{ success() }} # This condition ensures it only runs if the previous step was successful
     runs-on: ubuntu-latest
     environment: staging
 
