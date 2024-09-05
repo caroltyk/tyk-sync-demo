@@ -3,15 +3,15 @@ name: Lint Tyk APIs
 on:
   pull_request:
     paths:
-    - 'infrastructure/staging/tyk/**'
-    - 'infrastructure/production/tyk/**'
+      - 'infrastructure/staging/tyk/**'
+      - 'infrastructure/production/tyk/**'
   workflow_dispatch:
     inputs:
       environment: 
         type: choice
         options:
-        - staging
-        - production
+          - staging
+          - production
   workflow_call:
     inputs:
       environment:
@@ -25,57 +25,54 @@ jobs:
       actions: read
       checks: write
     steps:
-    - 
-        name: Checkout
-        uses: actions/checkout@v4
-    - 
-        name: Determine Environment
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Determine Environment
         id: determine_environment
         run: |
           if [[ "${{ github.event_name }}" == "workflow_call" ]]; then
             # Workflow called with an input
-            echo "environment=${{ inputs.environment }}" >> $GITHUB_OUTPUT
+            echo "environment=${{ inputs.environment }}" >> $GITHUB_ENV
           elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             # Workflow called with an input
-            echo "environment=${{ inputs.environment }}" >> $GITHUB_OUTPUT
+            echo "environment=${{ inputs.environment }}" >> $GITHUB_ENV
           elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
             # Determine which directory to process based on modified files
             MODIFIED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
-            if echo "$MODIFIED_FILES" | grep -q '^staging/'; then
-              echo "environment=staging" >> $GITHUB_OUTPUT
-            elif echo "$MODIFIED_FILES" | grep -q '^production/'; then
-              echo "environment=production" >> $GITHUB_OUTPUT
+            if echo "$MODIFIED_FILES" | grep -q '^infrastructure/staging/tyk/'; then
+              echo "environment=staging" >> $GITHUB_ENV
+            elif echo "$MODIFIED_FILES" | grep -q '^infrastructure/production/tyk/'; then
+              echo "environment=production" >> $GITHUB_ENV
             else
               echo "Error: No relevant files modified in the pull request." >&2
               exit 1
             fi
           fi
-    -
-        name: Lint api definitions
+
+      - name: Lint API Definitions
         uses: stoplightio/spectral-action@latest
         with:
-            file_glob: infrastructure/${{ steps.determine_environment.outputs.environment }}/tyk/apis/api-*.json
-            spectral_ruleset: infrastructure/${{ steps.determine_environment.outputs.environment }}/tyk/tykapi-ruleset.yaml
+          file_glob: infrastructure/${{ env.environment }}/tyk/apis/api-*.json
+          spectral_ruleset: infrastructure/${{ env.environment }}/tyk/tykapi-ruleset.yaml
         continue-on-error: true
-    -
-        name: Extract OAS
+
+      - name: Extract OAS
         run: |
-            #!/bin/bash
+          cd infrastructure/${{ env.environment }}/tyk/apis
 
-            cd infrastructure/${{ steps.determine_environment.outputs.environment }}/tyk/apis
+          for file in oas-*.json; do
+            if [ -f "$file" ]; then
+              jq '.oas' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+              echo "finished processing $file"
+            fi
+          done
 
-            for file in oas-*.json; do
-                if [ -f "$file" ]; then
-                    jq '.oas' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
-                    echo "finished processing $file"
-                fi
-            done
+          echo "done"
 
-            echo "done"
-    -
-        name: Lint oas api definitions
+      - name: Lint OAS API Definitions
         uses: stoplightio/spectral-action@latest
         with:
-            file_glob: infrastructure/${{ steps.determine_environment.outputs.environment }}/tyk/apis/oas-*.json
-            spectral_ruleset: infrastructure/${{ steps.determine_environment.outputs.environment }}/tyk/tykoas-ruleset.yaml
+          file_glob: infrastructure/${{ env.environment }}/tyk/apis/oas-*.json
+          spectral_ruleset: infrastructure/${{ env.environment }}/tyk/tykoas-ruleset.yaml
         continue-on-error: true
