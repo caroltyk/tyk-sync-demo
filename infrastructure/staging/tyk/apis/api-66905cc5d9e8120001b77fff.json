@@ -479,7 +479,7 @@
         "disabled": false
       }
     },
-    "tags": [],
+    "tags": ["edge"],
     "detailed_tracing": false,
     "scopes": {
       "jwt": {},

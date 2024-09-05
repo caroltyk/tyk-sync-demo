@@ -1259,6 +1259,12 @@
         "listenPath": {
           "strip": true,
           "value": "/petstore-keyless"
+        },
+        "gatewayTags": {
+          "enabled": true,
+          "tags": [
+            "edge"
+          ]
         }
       },
       "upstream": {

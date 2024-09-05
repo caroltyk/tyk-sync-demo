@@ -1288,6 +1288,12 @@
         "listenPath": {
           "strip": true,
           "value": "/petstore-jwt"
+        },
+        "gatewayTags": {
+          "enabled": true,
+          "tags": [
+            "edge"
+          ]
         }
       },
       "upstream": {
