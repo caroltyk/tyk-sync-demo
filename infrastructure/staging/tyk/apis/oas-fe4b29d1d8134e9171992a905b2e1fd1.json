@@ -1247,6 +1247,12 @@
         "listenPath": {
           "strip": true,
           "value": "/petstore-keyless"
+        },
+        "gatewayTags": {
+          "enabled": true,
+          "tags": [
+            "env://TYK_SECRET_ENV"
+          ]
         }
       },
       "upstream": {

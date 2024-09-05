@@ -479,7 +479,9 @@
         "disabled": false
       }
     },
-    "tags": [],
+    "tags": [
+      "env://TYK_SECRET_ENV"
+    ],
     "detailed_tracing": false,
     "scopes": {
       "jwt": {},
