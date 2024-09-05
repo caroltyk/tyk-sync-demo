@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write # Grants write permission to modify files in the repository
+  contents: write
+  actions: read
+  checks: write
 
 jobs:
   sync-production:
