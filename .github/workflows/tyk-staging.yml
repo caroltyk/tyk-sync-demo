@@ -42,6 +42,14 @@ jobs:
         echo '}' >> .tyk.json
         cat .tyk.json
 
+    - name: Replace Target Url hostname
+      env: 
+        TARGET_HOST: ${{ vars.API_TARGET_HOST }}
+        DIRECTORY: "./infrastructure/staging/tyk/apis/"
+      run: |
+        chmod +x ./.github/scripts/replace_target_host.sh
+        ./.github/scripts/replace_target_host.sh
+
     - name: Sync with Tyk
       run: |
         echo 'Sync config to ${TYK_DASHBOARD_URL}'

@@ -1297,7 +1297,7 @@
         }
       },
       "upstream": {
-        "url": "http://petstore3.swagger.io/api/v3"
+        "url": "http://petstore.TARGET_HOST:8080/api/v3"
       }
     }
   },

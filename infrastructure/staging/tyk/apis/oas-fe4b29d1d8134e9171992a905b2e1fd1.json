@@ -1268,7 +1268,7 @@
         }
       },
       "upstream": {
-        "url": "http://petstore3.default:8080/api/v3"
+        "url": "http://petstore.TARGET_HOST:8080/api/v3"
       }
     }
   },
