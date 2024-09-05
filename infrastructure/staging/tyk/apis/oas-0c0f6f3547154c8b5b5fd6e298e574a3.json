@@ -1281,7 +1281,7 @@
               "identityBaseField": "sub",
               "policyFieldName": "pol",
               "signingMethod": "rsa",
-              "source": "env://TYK_SECRET_KEYCLOAK_SOURCE"
+              "source": "http://keycloak.keycloak/realms/jwt-staging/protocol/openid-connect/certs"
             }
           }
         },
