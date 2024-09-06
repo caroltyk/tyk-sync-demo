@@ -1276,10 +1276,5 @@
   "is_site": false,
   "sort_by": 0,
   "user_group_owners": [],
-  "user_owners": [],
-  "api_definition": {
-    "proxy": {
-      "target_url": null
-    }
-  }
+  "user_owners": []
 }

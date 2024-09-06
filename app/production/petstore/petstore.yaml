@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: petstore
+  name: petstore
+  namespace: production
+spec:
+  containers:
+  - image: swaggerapi/petstore3:unstable
+    name: petstore
+    ports:
+    - containerPort: 8080
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

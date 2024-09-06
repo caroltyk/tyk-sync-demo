@@ -1,0 +1,44 @@
+{
+  "_id": "66dad461af14540001e05fcf",
+  "id": "e5dfa3bf25c84546bdb64ad08c6aa405",
+  "name": "Staging API template",
+  "org_id": "664f5023d4df31000105fc8d",
+  "description": "Standard RESTFUL API template on staging environment",
+  "kind": "oas-template",
+  "data": {
+    "openapi": "3.0.3",
+    "info": {
+      "version": "1.0.0",
+      "title": "default"
+    },
+    "security": [],
+    "paths": {},
+    "components": {
+      "securitySchemes": {}
+    },
+    "x-tyk-api-gateway": {
+      "info": {
+        "state": {
+          "active": true,
+          "internal": false
+        }
+      },
+      "server": {
+        "detailedTracing": {
+          "enabled": true
+        },
+        "gatewayTags": {
+          "enabled": true,
+          "tags": [
+            "staging",
+            "edge"
+          ]
+        },
+        "detailedActivityLogs": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "last_updated": "2024-09-06T10:08:35.073Z"
+}

@@ -30,7 +30,6 @@ Some example API configurations are provided, which can be found in the `infrast
 - `httpbin_jwt` (A protected classic HTTP API)
 - `petstore_jwt` (A protected OAS HTTP API)
 - `petstore_keyless` (A keyless OAS HTTP API)
-- `starwars` (UDG API)
 
 3 example GitHub workflows are configured:
 1. `tyk-lint.yml` - Validate API configurations against API configuration rulesets on pull requests
@@ -97,7 +96,7 @@ To create or modify API configurations,
     Example: 
     1. `jwt_source` in httpbin_jwt and petstore_jwt is set to `env://TYK_SECRET_KEYCLOAK_SOURCE`, allowing different gateways to configure different Keycloak realms for authentication.
 
-    2. In this demo, Upstream URL in API is modified by a [custom script](https://github.com/caroltyk/tyk-sync-example/blob/main/.github/scripts/replace_target_host.sh) during the deployment process.
+    2. In this demo, Upstream URL in API is modified by a [custom script](https://github.com/caroltyk/tyk-sync-example/blob/main/.github/scripts/replace_target_host.sh) that replaces "TARGET_HOST" in upstream URL to a variable defined in GitHub during deployment.
 
 ## Lint API configurations
 
