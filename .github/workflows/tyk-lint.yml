@@ -31,6 +31,9 @@ jobs:
       - name: Determine Environment
         id: determine_environment
         run: |
+          echo ${{ github.event_name }}
+          echo ${{ inputs.environment }}
+
           if [[ "${{ github.event_name }}" == "workflow_call" ]]; then
             # Workflow called with an input
             echo "environment=${{ inputs.environment }}" >> $GITHUB_ENV
