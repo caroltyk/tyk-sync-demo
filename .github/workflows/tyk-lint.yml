@@ -40,6 +40,7 @@ jobs:
           elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
             # Determine which directory to process based on modified files
             MODIFIED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }})
+            echo $MODIFIED_FILES
             if echo "$MODIFIED_FILES" | grep -q '^infrastructure/staging/tyk/'; then
               echo "environment=staging" >> $GITHUB_ENV
             elif echo "$MODIFIED_FILES" | grep -q '^infrastructure/production/tyk/'; then
