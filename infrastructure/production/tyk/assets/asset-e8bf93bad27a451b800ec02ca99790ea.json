@@ -1,0 +1,50 @@
+{
+  "_id": "66d06a1669597e00014cd798",
+  "id": "e8bf93bad27a451b800ec02ca99790ea",
+  "name": "Production API Template",
+  "org_id": "63fc896217f5f10001783a18",
+  "description": "Standard RESTFUL API template on production environment",
+  "kind": "oas-template",
+  "data": {
+    "openapi": "3.0.3",
+    "info": {
+      "version": "1.0.0",
+      "title": "default"
+    },
+    "security": [
+      {
+        "authToken": []
+      }
+    ],
+    "paths": {},
+    "components": {
+      "securitySchemes": {
+        "authToken": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "Authorization"
+        }
+      }
+    },
+    "x-tyk-api-gateway": {
+      "server": {
+        "gatewayTags": {
+          "enabled": true,
+          "tags": [
+            "production"
+          ]
+        },
+        "authentication": {
+          "enabled": true,
+          "securitySchemes": {
+            "authToken": {
+              "enabled": true,
+              "enableClientCertificate": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "last_updated": "2024-08-29T12:31:18.18Z"
+}

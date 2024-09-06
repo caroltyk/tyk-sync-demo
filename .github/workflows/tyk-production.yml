@@ -19,7 +19,8 @@ jobs:
 
     - name: Copy files from staging to production
       run: |
-        cp -r ./infrastructure/staging/tyk/* ./infrastructure/production/tyk/
+        cp -r ./infrastructure/staging/tyk/apis/*.json ./infrastructure/production/tyk/apis
+        cp -r ./infrastructure/staging/tyk/policies/*.json ./infrastructure/production/tyk/policies
 
     - name: Commit and Push Changes
       run: |
