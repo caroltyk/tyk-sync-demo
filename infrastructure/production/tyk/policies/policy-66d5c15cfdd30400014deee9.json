@@ -3,7 +3,7 @@
   "id": "66d5c15cfdd30400014deee9",
   "name": "jwt-policy",
   "org_id": "66d1d9defdd30400014deeda",
-  "rate": 1000,
+  "rate": 100,
   "per": 60,
   "quota_max": -1,
   "quota_renewal_rate": -1,
