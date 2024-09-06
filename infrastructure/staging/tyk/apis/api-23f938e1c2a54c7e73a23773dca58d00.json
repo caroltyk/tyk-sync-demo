@@ -2,7 +2,7 @@
   "api_definition": {
     "id": "66d6bee5fdd30400014deeed",
     "name": "httpbin jwt",
-    "slug": "",
+    "slug": "slug",
     "listen_port": 0,
     "protocol": "",
     "enable_proxy_protocol": false,
