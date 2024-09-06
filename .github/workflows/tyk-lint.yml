@@ -51,8 +51,6 @@ jobs:
             fi
           fi
 
-          echo ${{ env.environment }}
-
       - name: Lint API Definitions
         uses: stoplightio/spectral-action@latest
         with:

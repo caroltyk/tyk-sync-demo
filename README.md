@@ -96,7 +96,7 @@ To create or modify API configurations,
     Example: 
     1. `jwt_source` in httpbin_jwt and petstore_jwt is set to `env://TYK_SECRET_KEYCLOAK_SOURCE`, allowing different gateways to configure different Keycloak realms for authentication.
 
-    2. In this demo, Upstream URL in API is modified by a [custom script](https://github.com/caroltyk/tyk-sync-example/blob/main/.github/scripts/replace_target_host.sh) that replaces "TARGET_HOST" in upstream URL to a variable defined in GitHub during deployment.
+    2. In this demo, Upstream URL in API is modified by a [custom script](https://github.com/caroltyk/tyk-sync-demo/blob/main/.github/scripts/replace_target_host.sh) that replaces "TARGET_HOST" in upstream URL to a variable defined in GitHub during deployment.
 
 ## Lint API configurations
 
@@ -104,31 +104,31 @@ The `tyk-lint.yml` workflow validates API configurations to ensure they comply w
 
 - **Trigger**: Runs automatically on every pull request.
 - **Process**:
-    - Uses a classic API ruleset ([tykapi-ruleset.yaml](https://github.com/caroltyk/tyk-sync-example/blob/main/infrastructure/staging/tyk/tykapi-ruleset.yaml)) to validate Tyk Classic APIs (e.g., checks to ensure APIs are not keyless).
-    - Uses an OAS ruleset ([tykoas-ruleset.yaml](https://github.com/caroltyk/tyk-sync-example/blob/main/infrastructure/staging/tyk/tykoas-ruleset.yaml)) to validate OAS APIs against industry-standard guidelines.
+    - Uses a classic API ruleset ([tykapi-ruleset.yaml](https://github.com/caroltyk/tyk-sync-demo/blob/main/infrastructure/staging/tyk/tykapi-ruleset.yaml)) to validate Tyk Classic APIs (e.g., checks to ensure APIs are not keyless).
+    - Uses an OAS ruleset ([tykoas-ruleset.yaml](https://github.com/caroltyk/tyk-sync-demo/blob/main/infrastructure/staging/tyk/tykoas-ruleset.yaml)) to validate OAS APIs against industry-standard guidelines.
 - **Outcome**: Reports any validation errors directly in the GitHub PR. If there are any validation errors, the workflow will fail, preventing the changes from being merged until they are resolved.
 
 ## Sync API configurations to staging
 
-The [`tyk-staging.yml`](https://github.com/caroltyk/tyk-sync-example/blob/main/.github/workflows/tyk-staging.yml) workflow is responsible for syncing API configurations to the staging environment after successful linting.
+The [`tyk-staging.yml`](https://github.com/caroltyk/tyk-sync-demo/blob/main/.github/workflows/tyk-staging.yml) workflow is responsible for syncing API configurations to the staging environment after successful linting.
 
 - **Trigger**: Automatically triggered upon merging a pull request into the `/infrastructure/staging/tyk` directory on the main branch.
 - **Process**:
     - Validates all API configurations and policies to ensure they are correct.
-    - Executes a [custom script](https://github.com/caroltyk/tyk-sync-example/blob/main/.github/scripts/replace_target_host.sh) that replaces "TARGET_HOST" in upstream URL to a variable defined in GitHub for staging environment.
+    - Executes a [custom script](https://github.com/caroltyk/tyk-sync-demo/blob/main/.github/scripts/replace_target_host.sh) that replaces "TARGET_HOST" in upstream URL to a variable defined in GitHub for staging environment.
     - Syncs the validated API configurations (found in `apis`, `assets`, and `policies` folders) to the staging environment.
     - Reports linting and sync status through exit codes; any errors during sync will be flagged.
 - **Outcome**: If successful, the API configurations are deployed to the staging environment for further testing. Any errors are reported, and the workflow fails, requiring attention.
 
 ## Promote API configurations to production
 
-The [`tyk-production.yml`](https://github.com/caroltyk/tyk-sync-example/blob/main/.github/workflows/tyk-production.yml) workflow handles the promotion of API configurations from the staging environment to the production environment.
+The [`tyk-production.yml`](https://github.com/caroltyk/tyk-sync-demo/blob/main/.github/workflows/tyk-production.yml) workflow handles the promotion of API configurations from the staging environment to the production environment.
 
 - **Trigger**: Manually triggered after confirming successful deployment and testing in the staging environment.
 - **Process**:
     - Copies API configurations from the `staging` folder to the `production` folder.
     - Validates the copied API configurations to ensure they are correct.
-    - Executes a [custom script](https://github.com/caroltyk/tyk-sync-example/blob/main/.github/scripts/replace_target_host.sh) that replaces "TARGET_HOST" in upstream URL to a variable defined in GitHub for production environment.
+    - Executes a [custom script](https://github.com/caroltyk/tyk-sync-demo/blob/main/.github/scripts/replace_target_host.sh) that replaces "TARGET_HOST" in upstream URL to a variable defined in GitHub for production environment.
     - Syncs the validated API configurations to the Tyk Cloud production environment.
     - Reports the status of the sync process through exit codes; any errors will cause the workflow to fail.
 - **Outcome**: Ensures that only thoroughly tested and validated APIs are promoted to production. If errors are found during the sync, they are reported, and the workflow is halted for correction.
