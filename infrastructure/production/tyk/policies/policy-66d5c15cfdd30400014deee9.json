@@ -1,0 +1,54 @@
+{
+  "_id": "66d5c15cfdd30400014deee9",
+  "id": "66d5c15cfdd30400014deee9",
+  "name": "jwt-policy",
+  "org_id": "66d1d9defdd30400014deeda",
+  "rate": 1000,
+  "per": 60,
+  "quota_max": -1,
+  "quota_renewal_rate": -1,
+  "throttle_interval": -1,
+  "throttle_retry_limit": -1,
+  "max_query_depth": -1,
+  "access_rights": {
+    "0c0f6f3547154c8b5b5fd6e298e574a3": {
+      "api_name": "petstore jwt",
+      "api_id": "0c0f6f3547154c8b5b5fd6e298e574a3",
+      "versions": [
+        ""
+      ],
+      "allowed_urls": [],
+      "restricted_types": [],
+      "limit": null,
+      "field_access_rights": [],
+      "allowance_scope": ""
+    },
+    "23f938e1c2a54c7e73a23773dca58d00": {
+      "api_name": "httpbin jwt",
+      "api_id": "23f938e1c2a54c7e73a23773dca58d00",
+      "versions": [
+        "Default"
+      ],
+      "allowed_urls": [],
+      "restricted_types": [],
+      "limit": null,
+      "field_access_rights": [],
+      "allowance_scope": ""
+    }
+  },
+  "hmac_enabled": false,
+  "active": true,
+  "is_inactive": false,
+  "date_created": "2024-09-02T13:45:00.880725Z",
+  "tags": [],
+  "key_expires_in": 0,
+  "partitions": {
+    "quota": true,
+    "rate_limit": true,
+    "complexity": false,
+    "acl": true,
+    "per_api": false
+  },
+  "last_updated": "1725350391",
+  "meta_data": {}
+}
