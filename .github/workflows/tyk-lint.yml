@@ -31,9 +31,6 @@ jobs:
       - name: Determine Environment
         id: determine_environment
         run: |
-          echo ${{ github.event_name }}
-          echo ${{ inputs.environment }}
-
           if [[ "${{ github.event_name }}" == "workflow_call" ]]; then
             # Workflow called with an input
             echo "environment=${{ inputs.environment }}" >> $GITHUB_ENV
@@ -52,6 +49,8 @@ jobs:
               exit 1
             fi
           fi
+
+          echo ${{ env.environment }}
 
       - name: Lint API Definitions
         uses: stoplightio/spectral-action@latest
